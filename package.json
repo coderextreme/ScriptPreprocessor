@@ -1,6 +1,6 @@
 {
   "name": "ScriptPreprocessor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "dependencies": {
     "@prantlf/jsonlint": "*",
@@ -13,8 +13,6 @@
     "jsdom": "*",
     "make-dir": "*",
     "node-mkdirp": "*",
-    "puppeteer": "*",
-    "x3dom": "*",
     "xmlhttprequest": "*"
   },
   "scripts": {
