@@ -1,0 +1,8 @@
+#!/bin/bash
+# Window defines this, use ${USERNAME:....} something instead
+export HOMESFOLDER=C:/Users
+export USERNAME=jcarl
+export X3DJSONLD=${HOMESFOLDER}/$USERNAME/ScriptPreprocessor
+export NODE=node.exe
+export NODEDIR=${X3DJSONLD}/src/main/node
+export EXAMPLES=${HOMESFOLDER}/$USERNAME/www.web3d.org/x3d/content/examples/

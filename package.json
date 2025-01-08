@@ -1,0 +1,24 @@
+{
+  "name": "ScriptPreprocessor",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@prantlf/jsonlint": "*",
+    "@xmldom/xmldom": "*",
+    "ajv": "*",
+    "ajv-formats": "*",
+    "ajv-formats-draft2019": "*",
+    "ajv-i18n": "*",
+    "express": "*",
+    "jsdom": "*",
+    "make-dir": "*",
+    "node-mkdirp": "*",
+    "puppeteer": "*",
+    "x3dom": "*",
+    "xmlhttprequest": "*"
+  },
+  "scripts": {
+    "start": "bash build.sh",
+    "ajv": "bash ajv.sh"
+  }
+}

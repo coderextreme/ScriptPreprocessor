@@ -1,0 +1,633 @@
+{
+  "X3D": {
+    "@profile": "Immersive",
+    "@version": "4.0",
+    "@xsd:noNamespaceSchemaLocation": "https://www.web3d.org/specifications/x3d-4.0.xsd",
+    "head": {
+      "component": [
+        {
+          "@name": "Scripting",
+          "@level": 1
+        }
+      ],
+      "meta": [
+        {
+          "@name": "title",
+          "@content": "flowers2.x3d"
+        },
+        {
+          "@name": "creator",
+          "@content": "John Carlson"
+        },
+        {
+          "@name": "transcriber",
+          "@content": "John Carlson"
+        },
+        {
+          "@name": "created",
+          "@content": "23 January 2005"
+        },
+        {
+          "@name": "modified",
+          "@content": "21 March 2018"
+        },
+        {
+          "@name": "description",
+          "@content": "2 random mathematical roses in spherical dimensions. rho = a + b * cos(c * theta) * cos(d * phi)"
+        },
+        {
+          "@name": "identifier",
+          "@content": "https://coderextreme.net/X3DJSONLD/src/main/data/flowers2.x3d"
+        },
+        {
+          "@name": "generator",
+          "@content": "manually written"
+        },
+        {
+          "@name": "license",
+          "@content": "https://coderextreme.net/X3DJSONLD/LICENSE"
+        },
+        {
+          "@name": "translated",
+          "@content": "8 January 2025"
+        },
+        {
+          "@name": "generator",
+          "@content": "DOM2JSONSerializer.js, https://github.com/coderextreme/X3DJSONLD/blob/master/src/main/node/DOM2JSONSerializer.js"
+        },
+        {
+          "@name": "reference",
+          "@content": "X3D JSON encoding: https://www.web3d.org/wiki/index.php/X3D_JSON_Encoding"
+        }
+      ]
+    },
+    "Scene": {
+      "-children": [
+        {
+          "NavigationInfo": {}
+        },
+        {
+          "Viewpoint": {
+            "@description": "Two mathematical orbitals",
+            "@position": [
+              0,
+              0,
+              50
+            ]
+          }
+        },
+        {
+          "Group": {
+            "-children": [
+              {
+                "DirectionalLight": {
+                  "@direction": [
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "Group": {
+                  "-children": [
+                    {
+                      "TimeSensor": {
+                        "@DEF": "DECLorbit_INSTANCE_Clock",
+                        "@cycleInterval": 16,
+                        "@loop": true
+                      }
+                    },
+                    {
+                      "OrientationInterpolator": {
+                        "@DEF": "DECLorbit_INSTANCE_OrbitPath",
+                        "@key": [
+                          0,
+                          0.5,
+                          1
+                        ],
+                        "@keyValue": [
+                          1,
+                          0,
+                          0,
+                          0,
+                          1,
+                          0,
+                          0,
+                          3.14,
+                          1,
+                          0,
+                          0,
+                          6.28
+                        ]
+                      }
+                    },
+                    {
+                      "Transform": {
+                        "@DEF": "DECLorbit_INSTANCE_OrbitTransform",
+                        "@translation": [
+                          -8,
+                          0,
+                          0
+                        ],
+                        "-children": [
+                          {
+                            "Shape": {
+                              "-appearance": {
+                                "Appearance": {
+                                  "-material": {
+                                    "Material": {
+                                      "@diffuseColor": [
+                                        1,
+                                        0.5,
+                                        0
+                                      ],
+                                      "@specularColor": [
+                                        1,
+                                        0.5,
+                                        0
+                                      ],
+                                      "@transparency": 0.75
+                                    }
+                                  }
+                                }
+                              },
+                              "-children": [
+                                {
+                                  "#comment": "<IndexedFaceSet DEF=\"Orbit\" creaseAngle=\"0\"> <Coordinate DEF=\"OrbitCoordinates\"/> </IndexedFaceSet>"
+                                },
+                                {
+                                  "IndexedFaceSet": {
+                                    "@ccw": false,
+                                    "@convex": false,
+                                    "@coordIndex": [
+                                      0,
+                                      1,
+                                      2,
+                                      -1
+                                    ],
+                                    "@DEF": "DECLorbit_INSTANCE_Orbit",
+                                    "-children": [
+                                      {
+                                        "Coordinate": {
+                                          "@DEF": "DECLorbit_INSTANCE_OrbitCoordinates",
+                                          "@point": [
+                                            0,
+                                            0,
+                                            1,
+                                            0,
+                                            1,
+                                            0,
+                                            1,
+                                            0,
+                                            0
+                                          ]
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "Script": {
+                        "@DEF": "DECLorbit_INSTANCE_OrbitScript",
+                        "field": [
+                          {
+                            "@name": "set_fraction",
+                            "@accessType": "inputOnly",
+                            "@type": "SFFloat"
+                          },
+                          {
+                            "@name": "coordinates",
+                            "@accessType": "inputOutput",
+                            "@type": "MFVec3f"
+                          },
+                          {
+                            "@name": "coordIndexes",
+                            "@accessType": "inputOutput",
+                            "@type": "MFInt32"
+                          },
+                          {
+                            "@name": "e",
+                            "@accessType": "inputOutput",
+                            "@type": "SFFloat",
+                            "@value": 5
+                          },
+                          {
+                            "@name": "f",
+                            "@accessType": "inputOutput",
+                            "@type": "SFFloat",
+                            "@value": 5
+                          },
+                          {
+                            "@name": "g",
+                            "@accessType": "inputOutput",
+                            "@type": "SFFloat",
+                            "@value": 5
+                          },
+                          {
+                            "@name": "h",
+                            "@accessType": "inputOutput",
+                            "@type": "SFFloat",
+                            "@value": 5
+                          },
+                          {
+                            "@name": "resolution",
+                            "@accessType": "inputOutput",
+                            "@type": "SFInt32",
+                            "@value": 50
+                          }
+                        ],
+                        "#sourceCode": [
+                          "ecmascript:",
+                          "",
+                          "\t\t\tfunction initialize() {",
+                          "\t\t\t     generateCoordinates();",
+                          "\t\t\t     var arrIndex = 0;",
+                          "\t\t\t     for (var i = 0; i < resolution-1; i++) {",
+                          "\t\t\t\tfor (var j = 0; j < resolution-1; j++) {",
+                          "\t\t\t\t     coordIndexes[arrIndex++] = i*resolution+j;",
+                          "\t\t\t\t     coordIndexes[arrIndex++] = i*resolution+j+1;",
+                          "\t\t\t\t     coordIndexes[arrIndex++] = (i+1)*resolution+j+1;",
+                          "\t\t\t\t     coordIndexes[arrIndex++] = (i+1)*resolution+j;",
+                          "\t\t\t\t     coordIndexes[arrIndex++] = -1;",
+                          "\t\t\t\t}",
+                          "\t\t\t    }",
+                          "\t\t\t}",
+                          "",
+                          "\t\t\tfunction generateCoordinates() {",
+                          "\t\t\t     var theta = 0.0;",
+                          "\t\t\t     var phi = 0.0;",
+                          "\t\t\t     var delta = (2 * 3.141592653) / (resolution-1);",
+                          "\t\t\t     var arrIndex = 0;",
+                          "\t\t\t     for (var i = 0; i < resolution; i++) {",
+                          "\t\t\t\tfor (var j = 0; j < resolution; j++) {",
+                          "\t\t\t\t\tvar rho = e + f * Math.cos(g * theta) * Math.cos(h * phi);",
+                          "\t\t\t\t\tcoordinates[arrIndex++] = new SFVec3f(",
+                          "\t\t\t\t\t\trho * Math.cos(phi) * Math.cos(theta),",
+                          "\t\t\t\t\t\trho * Math.cos(phi) * Math.sin(theta),",
+                          "\t\t\t\t\t\trho * Math.sin(phi)",
+                          "\t\t\t\t\t);",
+                          "\t\t\t\t\ttheta += delta;",
+                          "\t\t\t\t}",
+                          "\t\t\t\tphi += delta;",
+                          "\t\t\t     }",
+                          "\t\t\t}",
+                          "",
+                          "\t\t\tfunction set_fraction(fraction, eventTime) {",
+                          "\t\t\t\tvar choice = Math.floor(Math.random() * 4);",
+                          "\t\t\t\tswitch (choice) {",
+                          "\t\t\t\tcase 0:",
+                          "\t\t\t\t\te += Math.floor(Math.random() * 2) * 2 - 1;",
+                          "\t\t\t\t\tbreak;",
+                          "\t\t\t\tcase 1:",
+                          "\t\t\t\t\tf += Math.floor(Math.random() * 2) * 2 - 1;",
+                          "\t\t\t\t\tbreak;",
+                          "\t\t\t\tcase 2:",
+                          "\t\t\t\t\tg += Math.floor(Math.random() * 2) * 2 - 1;",
+                          "\t\t\t\t\tbreak;",
+                          "\t\t\t\tcase 3:",
+                          "\t\t\t\t\th += Math.floor(Math.random() * 2) * 2 - 1;",
+                          "\t\t\t\t\tbreak;",
+                          "\t\t\t\t}",
+                          "\t\t\t\tif (e < 1) {",
+                          "\t\t\t\t\tf = 10;",
+                          "\t\t\t\t}",
+                          "\t\t\t\tif (f < 1) {",
+                          "\t\t\t\t\tf = 10;",
+                          "\t\t\t\t}",
+                          "\t\t\t\tif (g < 1) {",
+                          "\t\t\t\t\tg = 4;",
+                          "\t\t\t\t}",
+                          "\t\t\t\tif (h < 1) {",
+                          "\t\t\t\t\th = 4;",
+                          "\t\t\t\t}",
+                          "\t\t\t\tgenerateCoordinates();",
+                          "\t\t\t}"
+                        ]
+                      }
+                    },
+                    {
+                      "ROUTE": {
+                        "@fromNode": "DECLorbit_INSTANCE_OrbitScript",
+                        "@fromField": "coordIndexes",
+                        "@toNode": "DECLorbit_INSTANCE_Orbit",
+                        "@toField": "set_coordIndex"
+                      }
+                    },
+                    {
+                      "ROUTE": {
+                        "@fromNode": "DECLorbit_INSTANCE_OrbitScript",
+                        "@fromField": "coordinates",
+                        "@toNode": "DECLorbit_INSTANCE_OrbitCoordinates",
+                        "@toField": "point"
+                      }
+                    },
+                    {
+                      "ROUTE": {
+                        "@fromNode": "DECLorbit_INSTANCE_Clock",
+                        "@fromField": "fraction_changed",
+                        "@toNode": "DECLorbit_INSTANCE_OrbitScript",
+                        "@toField": "set_fraction"
+                      }
+                    },
+                    {
+                      "ROUTE": {
+                        "@fromNode": "DECLorbit_INSTANCE_OrbitPath",
+                        "@fromField": "value_changed",
+                        "@toNode": "DECLorbit_INSTANCE_OrbitTransform",
+                        "@toField": "rotation"
+                      }
+                    },
+                    {
+                      "ROUTE": {
+                        "@fromNode": "DECLorbit_INSTANCE_Clock",
+                        "@fromField": "fraction_changed",
+                        "@toNode": "DECLorbit_INSTANCE_OrbitPath",
+                        "@toField": "set_fraction"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "Group": {
+                  "-children": [
+                    {
+                      "TimeSensor": {
+                        "@DEF": "DECLorbit_INSTANCE1000_Clock",
+                        "@cycleInterval": 16,
+                        "@loop": true
+                      }
+                    },
+                    {
+                      "OrientationInterpolator": {
+                        "@DEF": "DECLorbit_INSTANCE1000_OrbitPath",
+                        "@key": [
+                          0,
+                          0.5,
+                          1
+                        ],
+                        "@keyValue": [
+                          1,
+                          0,
+                          0,
+                          0,
+                          1,
+                          0,
+                          0,
+                          3.14,
+                          1,
+                          0,
+                          0,
+                          6.28
+                        ]
+                      }
+                    },
+                    {
+                      "Transform": {
+                        "@DEF": "DECLorbit_INSTANCE1000_OrbitTransform",
+                        "@translation": [
+                          8,
+                          0,
+                          0
+                        ],
+                        "-children": [
+                          {
+                            "Shape": {
+                              "-appearance": {
+                                "Appearance": {
+                                  "-material": {
+                                    "Material": {
+                                      "@diffuseColor": [
+                                        0,
+                                        0.5,
+                                        1
+                                      ],
+                                      "@specularColor": [
+                                        0,
+                                        0.5,
+                                        1
+                                      ],
+                                      "@transparency": 0.5
+                                    }
+                                  }
+                                }
+                              },
+                              "-children": [
+                                {
+                                  "#comment": "<IndexedFaceSet DEF=\"Orbit\" creaseAngle=\"0\"> <Coordinate DEF=\"OrbitCoordinates\"/> </IndexedFaceSet>"
+                                },
+                                {
+                                  "IndexedFaceSet": {
+                                    "@ccw": false,
+                                    "@convex": false,
+                                    "@coordIndex": [
+                                      0,
+                                      1,
+                                      2,
+                                      -1
+                                    ],
+                                    "@DEF": "DECLorbit_INSTANCE1000_Orbit",
+                                    "-children": [
+                                      {
+                                        "Coordinate": {
+                                          "@DEF": "DECLorbit_INSTANCE1000_OrbitCoordinates",
+                                          "@point": [
+                                            0,
+                                            0,
+                                            1,
+                                            0,
+                                            1,
+                                            0,
+                                            1,
+                                            0,
+                                            0
+                                          ]
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "Script": {
+                        "@DEF": "DECLorbit_INSTANCE1000_OrbitScript",
+                        "field": [
+                          {
+                            "@name": "set_fraction",
+                            "@accessType": "inputOnly",
+                            "@type": "SFFloat"
+                          },
+                          {
+                            "@name": "coordinates",
+                            "@accessType": "inputOutput",
+                            "@type": "MFVec3f"
+                          },
+                          {
+                            "@name": "coordIndexes",
+                            "@accessType": "inputOutput",
+                            "@type": "MFInt32"
+                          },
+                          {
+                            "@name": "e",
+                            "@accessType": "inputOutput",
+                            "@type": "SFFloat",
+                            "@value": 5
+                          },
+                          {
+                            "@name": "f",
+                            "@accessType": "inputOutput",
+                            "@type": "SFFloat",
+                            "@value": 5
+                          },
+                          {
+                            "@name": "g",
+                            "@accessType": "inputOutput",
+                            "@type": "SFFloat",
+                            "@value": 5
+                          },
+                          {
+                            "@name": "h",
+                            "@accessType": "inputOutput",
+                            "@type": "SFFloat",
+                            "@value": 5
+                          },
+                          {
+                            "@name": "resolution",
+                            "@accessType": "inputOutput",
+                            "@type": "SFInt32",
+                            "@value": 50
+                          }
+                        ],
+                        "#sourceCode": [
+                          "ecmascript:",
+                          "",
+                          "\t\t\tfunction initialize() {",
+                          "\t\t\t     generateCoordinates();",
+                          "\t\t\t     var arrIndex = 0;",
+                          "\t\t\t     for (var i = 0; i < resolution-1; i++) {",
+                          "\t\t\t\tfor (var j = 0; j < resolution-1; j++) {",
+                          "\t\t\t\t     coordIndexes[arrIndex++] = i*resolution+j;",
+                          "\t\t\t\t     coordIndexes[arrIndex++] = i*resolution+j+1;",
+                          "\t\t\t\t     coordIndexes[arrIndex++] = (i+1)*resolution+j+1;",
+                          "\t\t\t\t     coordIndexes[arrIndex++] = (i+1)*resolution+j;",
+                          "\t\t\t\t     coordIndexes[arrIndex++] = -1;",
+                          "\t\t\t\t}",
+                          "\t\t\t    }",
+                          "\t\t\t}",
+                          "",
+                          "\t\t\tfunction generateCoordinates() {",
+                          "\t\t\t     var theta = 0.0;",
+                          "\t\t\t     var phi = 0.0;",
+                          "\t\t\t     var delta = (2 * 3.141592653) / (resolution-1);",
+                          "\t\t\t     var arrIndex = 0;",
+                          "\t\t\t     for (var i = 0; i < resolution; i++) {",
+                          "\t\t\t\tfor (var j = 0; j < resolution; j++) {",
+                          "\t\t\t\t\tvar rho = e + f * Math.cos(g * theta) * Math.cos(h * phi);",
+                          "\t\t\t\t\tcoordinates[arrIndex++] = new SFVec3f(",
+                          "\t\t\t\t\t\trho * Math.cos(phi) * Math.cos(theta),",
+                          "\t\t\t\t\t\trho * Math.cos(phi) * Math.sin(theta),",
+                          "\t\t\t\t\t\trho * Math.sin(phi)",
+                          "\t\t\t\t\t);",
+                          "\t\t\t\t\ttheta += delta;",
+                          "\t\t\t\t}",
+                          "\t\t\t\tphi += delta;",
+                          "\t\t\t     }",
+                          "\t\t\t}",
+                          "",
+                          "\t\t\tfunction set_fraction(fraction, eventTime) {",
+                          "\t\t\t\tvar choice = Math.floor(Math.random() * 4);",
+                          "\t\t\t\tswitch (choice) {",
+                          "\t\t\t\tcase 0:",
+                          "\t\t\t\t\te += Math.floor(Math.random() * 2) * 2 - 1;",
+                          "\t\t\t\t\tbreak;",
+                          "\t\t\t\tcase 1:",
+                          "\t\t\t\t\tf += Math.floor(Math.random() * 2) * 2 - 1;",
+                          "\t\t\t\t\tbreak;",
+                          "\t\t\t\tcase 2:",
+                          "\t\t\t\t\tg += Math.floor(Math.random() * 2) * 2 - 1;",
+                          "\t\t\t\t\tbreak;",
+                          "\t\t\t\tcase 3:",
+                          "\t\t\t\t\th += Math.floor(Math.random() * 2) * 2 - 1;",
+                          "\t\t\t\t\tbreak;",
+                          "\t\t\t\t}",
+                          "\t\t\t\tif (e < 1) {",
+                          "\t\t\t\t\tf = 10;",
+                          "\t\t\t\t}",
+                          "\t\t\t\tif (f < 1) {",
+                          "\t\t\t\t\tf = 10;",
+                          "\t\t\t\t}",
+                          "\t\t\t\tif (g < 1) {",
+                          "\t\t\t\t\tg = 4;",
+                          "\t\t\t\t}",
+                          "\t\t\t\tif (h < 1) {",
+                          "\t\t\t\t\th = 4;",
+                          "\t\t\t\t}",
+                          "\t\t\t\tgenerateCoordinates();",
+                          "\t\t\t}"
+                        ]
+                      }
+                    },
+                    {
+                      "ROUTE": {
+                        "@fromNode": "DECLorbit_INSTANCE1000_OrbitScript",
+                        "@fromField": "coordIndexes",
+                        "@toNode": "DECLorbit_INSTANCE1000_Orbit",
+                        "@toField": "set_coordIndex"
+                      }
+                    },
+                    {
+                      "ROUTE": {
+                        "@fromNode": "DECLorbit_INSTANCE1000_OrbitScript",
+                        "@fromField": "coordinates",
+                        "@toNode": "DECLorbit_INSTANCE1000_OrbitCoordinates",
+                        "@toField": "point"
+                      }
+                    },
+                    {
+                      "ROUTE": {
+                        "@fromNode": "DECLorbit_INSTANCE1000_Clock",
+                        "@fromField": "fraction_changed",
+                        "@toNode": "DECLorbit_INSTANCE1000_OrbitScript",
+                        "@toField": "set_fraction"
+                      }
+                    },
+                    {
+                      "ROUTE": {
+                        "@fromNode": "DECLorbit_INSTANCE1000_OrbitPath",
+                        "@fromField": "value_changed",
+                        "@toNode": "DECLorbit_INSTANCE1000_OrbitTransform",
+                        "@toField": "rotation"
+                      }
+                    },
+                    {
+                      "ROUTE": {
+                        "@fromNode": "DECLorbit_INSTANCE1000_Clock",
+                        "@fromField": "fraction_changed",
+                        "@toNode": "DECLorbit_INSTANCE1000_OrbitPath",
+                        "@toField": "set_fraction"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "encoding": "UTF-8",
+    "JSON schema": "https://www.web3d.org/specifications/x3d-4.0-JSONSchema.json"
+  }
+}
