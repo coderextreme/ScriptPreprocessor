@@ -1,3 +1,4 @@
 #!/bin/env bash
-cd src/main/shell
-bash ./runppp.sh
+pushd src/main/shell
+bash ./runspp.sh
+popd

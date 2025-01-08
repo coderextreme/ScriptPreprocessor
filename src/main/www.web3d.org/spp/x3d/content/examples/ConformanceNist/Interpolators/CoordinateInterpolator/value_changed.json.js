@@ -1,0 +1,353 @@
+var x3dom = require('../node/fields.js');
+if (typeof X3DJSON === 'undefined') {
+	var X3DJSON = {};
+}
+if (typeof __eventTime === 'undefined') {
+	var __eventTime = 0;
+}
+if (typeof x3dom !== 'undefined') {
+    var MFBool = x3dom.fields.MFBoolean;
+    var MFColor = x3dom.fields.MFColor;
+    var MFColorRGBA = x3dom.fields.MFColorRGBA;
+    var MFFloat = x3dom.fields.MFFloat;
+    var MFInt32 = x3dom.fields.MFInt32;
+    var MFNode = x3dom.fields.MFNode;
+    var MFRotation = x3dom.fields.MFRotation;
+    var MFString = x3dom.fields.MFString;
+    var MFVec2f = x3dom.fields.MFVec2f;
+    var MFVec3f = x3dom.fields.MFVec3f;
+    var Quaternion = x3dom.fields.Quaternion;
+    var SFColor = x3dom.fields.SFColor;
+    var SFColorRGBA = x3dom.fields.SFColorRGBA;
+    var SFImage = x3dom.fields.SFImage;
+    var SFMatrix4f = x3dom.fields.SFMatrix4f;
+    var SFNode = x3dom.fields.SFNode;
+    var SFRotation = x3dom.fields.SFRotation;
+    var SFVec2f = x3dom.fields.SFVec2f;
+    var SFVec3f = x3dom.fields.SFVec3f;
+    var SFVec4f = x3dom.fields.SFVec4f;
+} else {
+    var SFVec3f = function() { return Array.prototype.slice.call(arguments, 0); };
+}
+var SFString = String;
+var SFTime = Number;
+var SFDouble = Number;
+var SFFloat = Number;
+var SFInt32 = Number;
+var SFBool = Boolean;
+var MFDouble = function() { return Array.prototype.slice.call(arguments, 0); };
+var MFImage = function() { return Array.prototype.slice.call(arguments, 0); };
+var MFMatrix3d = function() { return Array.prototype.slice.call(arguments, 0); };
+var MFMatrix3f = function() { return Array.prototype.slice.call(arguments, 0); };
+var MFMatrix4d = function() { return Array.prototype.slice.call(arguments, 0); };
+var MFMatrix4f = function() { return Array.prototype.slice.call(arguments, 0); };
+var MFTime = function() { return Array.prototype.slice.call(arguments, 0); };
+var MFVec2d = function() { return Array.prototype.slice.call(arguments, 0); };
+var MFVec3d = function() { return Array.prototype.slice.call(arguments, 0); };
+var MFVec4d = function() { return Array.prototype.slice.call(arguments, 0); };
+var MFVec4f = function() { return Array.prototype.slice.call(arguments, 0); };
+var SFMatrix3d = function() { return Array.prototype.slice.call(arguments, 0); };
+var SFMatrix3f = function() { return Array.prototype.slice.call(arguments, 0); };
+var SFMatrix4d = function() { return Array.prototype.slice.call(arguments, 0); };
+var SFVec2d = function() { return Array.prototype.slice.call(arguments, 0); };
+var SFVec3d = function() { return Array.prototype.slice.call(arguments, 0); };
+var SFVec4d = function() { return Array.prototype.slice.call(arguments, 0); };
+if (typeof document === 'undefined') {
+	document = { querySelector : function() {;
+		return {
+			setAttribute : function(field, value) {
+				this[field] = value;
+				console.log('set '+ field+ '='+ value);
+			},
+			getAttribute : function(field) {
+				var value = this[field];
+				console.log('get '+ field+ '='+ value);
+			}
+		};
+	}};
+}
+if (typeof $ !== 'function') {
+	$ = function() { return { attr : function() {}, 0 : null }; };
+}
+X3DJSON.nodeUtil = function(selector, node, field, value) {
+		if (typeof selector === 'undefined') {
+			selector = "";
+		} else {
+			selector = selector+" ";
+		}
+		selector = selector+"[DEF='"+node+"']";
+		var element = document.querySelector(selector);
+		if (element === null) {
+			console.error('unDEFed node', node, selector);
+		} else if (arguments.length > 3) {
+			/*
+			if (value && typeof value.toString === 'function') {
+				value = value.toString();
+			}
+			$(selector).attr(field, value);
+			// console.log('set', node, '.', field, '=', value);
+			*/
+			try {
+				if (typeof element.setFieldValue === 'function') {
+					element.setFieldValue(field, value);
+				} else {
+					element.setAttribute(field, value);
+				}
+			} catch (e) {
+				console.log(e);
+			}
+			return element;
+		} else if (arguments.length > 2) {
+			if (typeof element.getFieldValue === 'function') {
+				value = element.getFieldValue(field);
+			} else {
+				value = element.getAttribute(field);
+			}
+			/*
+			if (element &&
+				element._x3domNode &&
+				element._x3domNode._vf &&
+				element._x3domNode._vf[field] &&
+				element._x3domNode._vf[field].setValueByStr) {
+				value = element._x3domNode._vf[field].setValueByStr(value);
+			}
+			*/
+			// console.log('get', node, '.', field,'=',value);
+			return value;
+		} else if (arguments.length > 0) {
+			return $(selector)[0];
+		} else {
+			return;
+		}
+};
+X3DJSON.createProxy = function(action, scriptObject) {
+	var proxy = new Proxy(scriptObject, {
+		get: function(target, property, receiver) {
+			return Reflect.get(target, property, receiver);
+		},
+		set: function(target, property, value, receiver) {
+                 if (typeof action[property] === 'object') {
+                        for (var route in action[property]) {
+                                if (typeof action[property][route] === 'function') {
+                                        action[property][route](property, value);
+   		                     // console.log('Set',property,'to', value);
+                                }
+                        }
+                 }
+		      return Reflect.set(target, property, value, receiver);
+		}
+	});
+	return proxy;
+};
+if (typeof X3DJSON['SceneC:/Users/jcarl/www.web3d.org/x3d/content/examples/ConformanceNist/Interpolators/CoordinateInterpolator/value_changed.json'] === 'undefined') {
+	X3DJSON['SceneC:/Users/jcarl/www.web3d.org/x3d/content/examples/ConformanceNist/Interpolators/CoordinateInterpolator/value_changed.json'] = {};
+}
+
+if (typeof X3DJSON['Script'] === 'undefined') {
+X3DJSON['Script'] = {};
+}
+if (typeof X3DJSON['Script']['Scene'] === 'undefined') {
+X3DJSON['Script']['Scene'] = {};
+}
+if (typeof X3DJSON['Script']['Scene']['C'] === 'undefined') {
+X3DJSON['Script']['Scene']['C'] = {};
+}
+if (typeof X3DJSON['Script']['Scene']['C']['/Users/jcarl/www.web3d.org/x3d/content/examples/ConformanceNist/Interpolators/CoordinateInterpolator/value_changed.json'] === 'undefined') {
+X3DJSON['Script']['Scene']['C']['/Users/jcarl/www.web3d.org/x3d/content/examples/ConformanceNist/Interpolators/CoordinateInterpolator/value_changed.json'] = {};
+}
+
+X3DJSON['Script']['Scene']['C']['/Users/jcarl/www.web3d.org/x3d/content/examples/ConformanceNist/Interpolators/CoordinateInterpolator/value_changed.json']['COORDINIZEIT'] = function() {
+	this.set_nodein1 = function (value) {
+		try {
+			this.proxy.nodein1 = (typeof value === 'string' && typeof value.indexOf === 'function' && value.indexOf(',') >= 0 ? value.split(/[ ,]+/) : value);
+		} catch (e) {
+			console.log('Problems setting nodein1 '+e);
+			console.error('Problems setting nodein1',e);
+		}
+	};
+	this.nodein1_changed = function () {
+		var value = this.nodein1;
+		return value;
+	};
+	try {
+		this.nodein1 = X3DJSON.nodeUtil("Scene","COORD_INTERP1");
+	} catch (e) {
+		console.log('Problems setting nodein1 '+e);
+		console.error('Problems setting nodein1',e);
+	}
+	this.set_nodein2 = function (value) {
+		try {
+			this.proxy.nodein2 = (typeof value === 'string' && typeof value.indexOf === 'function' && value.indexOf(',') >= 0 ? value.split(/[ ,]+/) : value);
+		} catch (e) {
+			console.log('Problems setting nodein2 '+e);
+			console.error('Problems setting nodein2',e);
+		}
+	};
+	this.nodein2_changed = function () {
+		var value = this.nodein2;
+		return value;
+	};
+	try {
+		this.nodein2 = X3DJSON.nodeUtil("Scene","COORD_INTERP1");
+	} catch (e) {
+		console.log('Problems setting nodein2 '+e);
+		console.error('Problems setting nodein2',e);
+	}
+	this.set_nodeout1 = function (value) {
+		try {
+			this.proxy.nodeout1 = (typeof value === 'string' && typeof value.indexOf === 'function' && value.indexOf(',') >= 0 ? value.split(/[ ,]+/) : value);
+		} catch (e) {
+			console.log('Problems setting nodeout1 '+e);
+			console.error('Problems setting nodeout1',e);
+		}
+	};
+	this.nodeout1_changed = function () {
+		var value = this.nodeout1;
+		return value;
+	};
+	try {
+		this.nodeout1 = X3DJSON.nodeUtil("Scene","COORD1");
+	} catch (e) {
+		console.log('Problems setting nodeout1 '+e);
+		console.error('Problems setting nodeout1',e);
+	}
+	this.set_nodeout2 = function (value) {
+		try {
+			this.proxy.nodeout2 = (typeof value === 'string' && typeof value.indexOf === 'function' && value.indexOf(',') >= 0 ? value.split(/[ ,]+/) : value);
+		} catch (e) {
+			console.log('Problems setting nodeout2 '+e);
+			console.error('Problems setting nodeout2',e);
+		}
+	};
+	this.nodeout2_changed = function () {
+		var value = this.nodeout2;
+		return value;
+	};
+	try {
+		this.nodeout2 = X3DJSON.nodeUtil("Scene","COORD2");
+	} catch (e) {
+		console.log('Problems setting nodeout2 '+e);
+		console.error('Problems setting nodeout2',e);
+	}
+	this.set_isOver1 = function (value) {
+		try {
+			this.proxy.isOver1 = (typeof value === 'string' && typeof value.indexOf === 'function' && value.indexOf(',') >= 0 ? value.split(/[ ,]+/) : value);
+		} catch (e) {
+			console.log('Problems setting isOver1 '+e);
+			console.error('Problems setting isOver1',e);
+		}
+	};
+	this.isOver1_changed = function () {
+		var value = this.isOver1;
+		return value;
+	};
+	try {
+		this.isOver1 = new SFBool();
+	} catch (e) {
+		console.log('Problems setting isOver1 '+e);
+		console.error('Problems setting isOver1',e);
+	}
+	this.set_isOver2 = function (value) {
+		try {
+			this.proxy.isOver2 = (typeof value === 'string' && typeof value.indexOf === 'function' && value.indexOf(',') >= 0 ? value.split(/[ ,]+/) : value);
+		} catch (e) {
+			console.log('Problems setting isOver2 '+e);
+			console.error('Problems setting isOver2',e);
+		}
+	};
+	this.isOver2_changed = function () {
+		var value = this.isOver2;
+		return value;
+	};
+	try {
+		this.isOver2 = new SFBool();
+	} catch (e) {
+		console.log('Problems setting isOver2 '+e);
+		console.error('Problems setting isOver2',e);
+	}
+	this.set_point = function (value) {
+		try {
+			this.proxy.point = (typeof value === 'string' && typeof value.indexOf === 'function' && value.indexOf(',') >= 0 ? value.split(/[ ,]+/) : value);
+		} catch (e) {
+			console.log('Problems setting point '+e);
+			console.error('Problems setting point',e);
+		}
+	};
+	this.point_changed = function () {
+		var value = this.point;
+		return value;
+	};
+	try {
+		this.point = new SFVec3f();
+	} catch (e) {
+		console.log('Problems setting point '+e);
+		console.error('Problems setting point',e);
+	}
+	this.set_reset = function (value) {
+		try {
+			this.proxy.reset = (typeof value === 'string' && typeof value.indexOf === 'function' && value.indexOf(',') >= 0 ? value.split(/[ ,]+/) : value);
+		} catch (e) {
+			console.log('Problems setting reset '+e);
+			console.error('Problems setting reset',e);
+		}
+	};
+	this.reset_changed = function () {
+		var value = this.reset;
+		return value;
+	};
+	try {
+		this.reset = new MFVec3f([new SFVec3f ( -1 , 1 , 1 ),new SFVec3f ( -1 , -1 , 1 ),new SFVec3f ( 1 , 1 , 1 ),new SFVec3f ( 1 , -1 , 1 ),new SFVec3f ( 1 , 1 , -1 ),new SFVec3f ( 1 , -1 , -1 ),new SFVec3f ( -1 , 1 , -1 ),new SFVec3f ( -1 , -1 , -1 )]);
+	} catch (e) {
+		console.log('Problems setting reset '+e);
+		console.error('Problems setting reset',e);
+	}
+};
+if (typeof X3DJSON['Obj'] === 'undefined') {
+X3DJSON['Obj'] = {};
+}
+if (typeof X3DJSON['Obj']['Scene'] === 'undefined') {
+X3DJSON['Obj']['Scene'] = {};
+}
+if (typeof X3DJSON['Obj']['Scene']['C'] === 'undefined') {
+X3DJSON['Obj']['Scene']['C'] = {};
+}
+if (typeof X3DJSON['Obj']['Scene']['C']['/Users/jcarl/www.web3d.org/x3d/content/examples/ConformanceNist/Interpolators/CoordinateInterpolator/value_changed.json'] === 'undefined') {
+X3DJSON['Obj']['Scene']['C']['/Users/jcarl/www.web3d.org/x3d/content/examples/ConformanceNist/Interpolators/CoordinateInterpolator/value_changed.json'] = {};
+}
+
+X3DJSON['Obj']['Scene']['C']['/Users/jcarl/www.web3d.org/x3d/content/examples/ConformanceNist/Interpolators/CoordinateInterpolator/value_changed.json']['COORDINIZEIT'] = new X3DJSON['Script']['Scene']['C']['/Users/jcarl/www.web3d.org/x3d/content/examples/ConformanceNist/Interpolators/CoordinateInterpolator/value_changed.json']['COORDINIZEIT']();
+if (typeof X3DJSON['Obj'] === 'undefined') {
+X3DJSON['Obj'] = {};
+}
+if (typeof X3DJSON['Obj']['Scene'] === 'undefined') {
+X3DJSON['Obj']['Scene'] = {};
+}
+if (typeof X3DJSON['Obj']['Scene']['C'] === 'undefined') {
+X3DJSON['Obj']['Scene']['C'] = {};
+}
+if (typeof X3DJSON['Obj']['Scene']['C']['/Users/jcarl/www.web3d.org/x3d/content/examples/ConformanceNist/Interpolators/CoordinateInterpolator/value_changed.json'] === 'undefined') {
+X3DJSON['Obj']['Scene']['C']['/Users/jcarl/www.web3d.org/x3d/content/examples/ConformanceNist/Interpolators/CoordinateInterpolator/value_changed.json'] = {};
+}
+if (typeof X3DJSON['Obj']['Scene']['C']['/Users/jcarl/www.web3d.org/x3d/content/examples/ConformanceNist/Interpolators/CoordinateInterpolator/value_changed.json']['COORDINIZEIT'] === 'undefined') {
+X3DJSON['Obj']['Scene']['C']['/Users/jcarl/www.web3d.org/x3d/content/examples/ConformanceNist/Interpolators/CoordinateInterpolator/value_changed.json']['COORDINIZEIT'] = {};
+}
+
+if (typeof X3DJSON['Obj']['Scene']['C']['/Users/jcarl/www.web3d.org/x3d/content/examples/ConformanceNist/Interpolators/CoordinateInterpolator/value_changed.json']['COORDINIZEIT']['ACTION'] === 'undefined') {
+X3DJSON['Obj']['Scene']['C']['/Users/jcarl/www.web3d.org/x3d/content/examples/ConformanceNist/Interpolators/CoordinateInterpolator/value_changed.json']['COORDINIZEIT']['ACTION'] = {};
+X3DJSON['Obj']['Scene']['C']['/Users/jcarl/www.web3d.org/x3d/content/examples/ConformanceNist/Interpolators/CoordinateInterpolator/value_changed.json']['COORDINIZEIT'].proxy = X3DJSON.createProxy(X3DJSON['Obj']['Scene']['C']['/Users/jcarl/www.web3d.org/x3d/content/examples/ConformanceNist/Interpolators/CoordinateInterpolator/value_changed.json']['COORDINIZEIT']['ACTION'],X3DJSON['Obj']['Scene']['C']['/Users/jcarl/www.web3d.org/x3d/content/examples/ConformanceNist/Interpolators/CoordinateInterpolator/value_changed.json']['COORDINIZEIT']);
+}
+if (typeof X3DJSON['Obj']['Scene']['C']['/Users/jcarl/www.web3d.org/x3d/content/examples/ConformanceNist/Interpolators/CoordinateInterpolator/value_changed.json']['COORDINIZEIT'].initialize === "function") X3DJSON['Obj']['Scene']['C']['/Users/jcarl/www.web3d.org/x3d/content/examples/ConformanceNist/Interpolators/CoordinateInterpolator/value_changed.json']['COORDINIZEIT'].initialize();
+    if (X3DJSON.nodeUtil("Scene","TS1")) {
+X3DJSON.nodeUtil("Scene","TS1").addEventListener('outputchange', function(event) {
+			X3DJSON['Obj']['Scene']['C']['/Users/jcarl/www.web3d.org/x3d/content/examples/ConformanceNist/Interpolators/CoordinateInterpolator/value_changed.json']['COORDINIZEIT'].isOver1(X3DJSON.nodeUtil("Scene","TS1","isOver"), __eventTime);
+}, false);
+}
+			X3DJSON['Obj']['Scene']['C']['/Users/jcarl/www.web3d.org/x3d/content/examples/ConformanceNist/Interpolators/CoordinateInterpolator/value_changed.json']['COORDINIZEIT'].isOver1(X3DJSON.nodeUtil("Scene","TS1","isOver"), __eventTime);
+    if (X3DJSON.nodeUtil("Scene","TS2")) {
+X3DJSON.nodeUtil("Scene","TS2").addEventListener('outputchange', function(event) {
+			X3DJSON['Obj']['Scene']['C']['/Users/jcarl/www.web3d.org/x3d/content/examples/ConformanceNist/Interpolators/CoordinateInterpolator/value_changed.json']['COORDINIZEIT'].isOver2(X3DJSON.nodeUtil("Scene","TS2","isOver"), __eventTime);
+}, false);
+}
+			X3DJSON['Obj']['Scene']['C']['/Users/jcarl/www.web3d.org/x3d/content/examples/ConformanceNist/Interpolators/CoordinateInterpolator/value_changed.json']['COORDINIZEIT'].isOver2(X3DJSON.nodeUtil("Scene","TS2","isOver"), __eventTime);
+			X3DJSON['Obj']['Scene']['C']['/Users/jcarl/www.web3d.org/x3d/content/examples/ConformanceNist/Interpolators/CoordinateInterpolator/value_changed.json']['COORDINIZEIT'].isOver1(X3DJSON.nodeUtil("Scene","TS1","isOver"), __eventTime);
+			X3DJSON['Obj']['Scene']['C']['/Users/jcarl/www.web3d.org/x3d/content/examples/ConformanceNist/Interpolators/CoordinateInterpolator/value_changed.json']['COORDINIZEIT'].isOver2(X3DJSON.nodeUtil("Scene","TS2","isOver"), __eventTime);
