@@ -9,6 +9,12 @@ Modify the settings in src/main/shell/classpath to suit your needs
 
 # Installation
 
+Clone the repo:
+
+```
+git clone https://github.com/coderextreme/ScriptPreprocessor
+```
+
 Get node and npm. Run:
 ```
 npm install
@@ -16,6 +22,11 @@ npm install
 Then to create the JavaScript files, run
 ```
 bash build.sh
+```
+
+Run the following for a list of errors
+```
+bash build.sh 2>&1 |grep ^See
 ```
 
 local data files are in src/main/data/*.json  Configure your example folder in src/main/shell/classpath
