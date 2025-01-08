@@ -3,6 +3,8 @@ Convert X3D Scripts to HTML scripts.
 
 Help is requested to improve src/main/node/Script.js.
 
+Help is request to convert bash scripts to JavaScript or PowerShell
+
 # configuration
 
 Modify the settings in src/main/shell/classpath to suit your needs
@@ -13,6 +15,7 @@ Clone the repo:
 
 ```
 git clone https://github.com/coderextreme/ScriptPreprocessor
+cd ScriptPreprocessor
 ```
 
 Get node and npm. Run:
@@ -29,7 +32,7 @@ Run the following for a list of errors
 bash build.sh 2>&1 |grep ^See
 ```
 
-local data files are in src/main/data/*.json  Configure your example folder in src/main/shell/classpath
+local data files are in src/main/data/*.json  Configure your EXAMPLES folder environment in src/main/shell/classpath .
 
 Look for *.good.js in src/main/spp and src/main/www.web3d.org/spp for good JavaScript conversions from JSON.
 
