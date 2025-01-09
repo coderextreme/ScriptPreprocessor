@@ -26,6 +26,10 @@ Then to create the JavaScript files, run
 ```
 bash build.sh
 ```
+or
+```
+powershell build.ps1
+```
 
 Run the following for a list of errors
 ```
@@ -46,6 +50,8 @@ X3D JSON files can end in .json.  .x3dj is not currently supported.
 * runexamples.sh -- Run Web3D examples, found here: http://www.web3d.org/x3d/content/examples/X3dExampleArchivesJsonScenes.zip, or run yours by setting classpath
 * runlocal.sh -- run local examples in src/main/data
 * runspp.sh -- run runlocal.sh and runexamples.sh
+* runexamples.ps1 -- Run Web3D examples, found here: http://www.web3d.org/x3d/content/examples/X3dExampleArchivesJsonScenes.zip, or run yours by setting classpath
+* runlocal.ps1 -- run local examples in src/main/data
 
 
 # Usage:
