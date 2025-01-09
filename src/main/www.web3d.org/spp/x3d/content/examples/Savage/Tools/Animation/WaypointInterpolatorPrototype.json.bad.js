@@ -710,7 +710,7 @@ X3DJSON['Script']['Scene']['C']['/Users/jcarl/www.web3d.org/x3d/content/examples
 		return value;
 	};
 	try {
-		this.positionKey = new MFFloat(0);
+		this.positionKey = new MFFloat([new SFFloat ( 0 )]);
 	} catch (e) {
 		console.log('Problems setting positionKey '+e);
 		console.error('Problems setting positionKey',e);

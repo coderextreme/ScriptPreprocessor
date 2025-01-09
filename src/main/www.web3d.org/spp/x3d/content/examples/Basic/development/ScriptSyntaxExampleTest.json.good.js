@@ -206,7 +206,7 @@ X3DJSON['Script']['Scene']['C']['/Users/jcarl/www.web3d.org/x3d/content/examples
 		return value;
 	};
 	try {
-		this.someMFFloats = new MFFloat(0,1,2);
+		this.someMFFloats = new MFFloat([new SFFloat ( 0 ),new SFFloat ( 1 ),new SFFloat ( 2 )]);
 	} catch (e) {
 		console.log('Problems setting someMFFloats '+e);
 		console.error('Problems setting someMFFloats',e);

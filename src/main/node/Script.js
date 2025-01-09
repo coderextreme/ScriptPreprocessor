@@ -539,6 +539,8 @@ class Scripts {
 			num = 9;
 		} else if (type.indexOf("MFMatrix4") === 0) {
 			num = 16;
+		} else if (type.indexOf("MFFloat") === 0) {
+			num = 1;
 		} else if (flat !== null) {
 			flat = str.substring(1, str.length-1);
 			return "new "+type+"("+flat+")";  // THIS WILL THROW AN ERROR IF you don't have a value for an outputOnly.  Fill in the type case above
