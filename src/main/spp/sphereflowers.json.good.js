@@ -139,8 +139,8 @@ X3DJSON.createProxy = function(action, scriptObject) {
 	});
 	return proxy;
 };
-if (typeof X3DJSON['Scene../data/sphereflowers.json'] === 'undefined') {
-	X3DJSON['Scene../data/sphereflowers.json'] = {};
+if (typeof X3DJSON['SceneC:/Users/jcarl/ScriptPreprocessor/src/main/data/sphereflowers.json'] === 'undefined') {
+	X3DJSON['SceneC:/Users/jcarl/ScriptPreprocessor/src/main/data/sphereflowers.json'] = {};
 }
 
     if (X3DJSON.nodeUtil("Scene","SongTime")) {

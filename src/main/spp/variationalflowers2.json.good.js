@@ -185,7 +185,7 @@ X3DJSON['Script']['Scene']['../data/variationalflowers2.json']['Animate'] = func
 		return value;
 	};
 	try {
-		this.values = new MFFloat(2,2,5,5,0,0);
+		this.values = new MFFloat([new SFFloat ( 2 ),new SFFloat ( 2 ),new SFFloat ( 5 ),new SFFloat ( 5 ),new SFFloat ( 0 ),new SFFloat ( 0 )]);
 	} catch (e) {
 		console.log('Problems setting values '+e);
 		console.error('Problems setting values',e);
@@ -203,7 +203,7 @@ X3DJSON['Script']['Scene']['../data/variationalflowers2.json']['Animate'] = func
 		return value;
 	};
 	try {
-		this.variations = new MFFloat(0.2,0.1,0.3,0.3,0.01,0.01);
+		this.variations = new MFFloat([new SFFloat ( 0.2 ),new SFFloat ( 0.1 ),new SFFloat ( 0.3 ),new SFFloat ( 0.3 ),new SFFloat ( 0.01 ),new SFFloat ( 0.01 )]);
 	} catch (e) {
 		console.log('Problems setting variations '+e);
 		console.error('Problems setting variations',e);

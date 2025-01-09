@@ -139,8 +139,8 @@ X3DJSON.createProxy = function(action, scriptObject) {
 	});
 	return proxy;
 };
-if (typeof X3DJSON['Scene../data/ballx_ite.json'] === 'undefined') {
-	X3DJSON['Scene../data/ballx_ite.json'] = {};
+if (typeof X3DJSON['SceneC:/Users/jcarl/ScriptPreprocessor/src/main/data/ballx_ite.json'] === 'undefined') {
+	X3DJSON['SceneC:/Users/jcarl/ScriptPreprocessor/src/main/data/ballx_ite.json'] = {};
 }
 
 
