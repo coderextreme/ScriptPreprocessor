@@ -44,8 +44,8 @@ function ProcessJSON(json, file) {
 		fs.writeFileSync(outfile+".good.js", totalcode);
 		console.error("OUTPUTTED", outfile+".good.js");
 	} catch (e) {
-		fs.writeFileSync(outfile+".js", totalcode);
-		console.error("See "+outfile+".js for bad code", e);
+		fs.writeFileSync(outfile+".bad.js", totalcode);
+		console.error("See src/main/shell/"+outfile+".bad.js for bad code", e);
 	}
 }
 
