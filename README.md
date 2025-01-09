@@ -46,3 +46,15 @@ X3D JSON files can end in .json.  .x3dj is not currently supported.
 * runexamples.sh -- Run Web3D examples, found here: http://www.web3d.org/x3d/content/examples/X3dExampleArchivesJsonScenes.zip, or run yours by setting classpath
 * runlocal.sh -- run local examples in src/main/data
 * runspp.sh -- run runlocal.sh and runexamples.sh
+
+
+# Usage:
+
+To use in a JavaScript program, do something like this:
+
+```
+        var Scripts = require('./Script.js');
+        var scripts = new Scripts();
+        scripts.loadScripts(json, "#x3domjson", url);
+        scripts.loadScripts(json, "#x3domxml", url);
+```
