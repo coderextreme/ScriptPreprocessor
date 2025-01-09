@@ -8,4 +8,4 @@ IFS=$'\n\t'
 . ./classpath
 
 echo ===================SPP.js Examples================================ 1>&2
-find "$EXAMPLES" -type f -name '*.json' -print | grep -v " " | xargs grep -lw Script | xargs ${NODE} ${NODEDIR}/SPP.js
+find "$EXAMPLES" -type f -name '*.json' -print0 | xargs -0 grep -lw Script | xargs ${NODE} ${NODEDIR}/SPP.js

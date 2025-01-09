@@ -9,4 +9,4 @@ IFS=$'\n\t'
 
 # Now does scripts too!
 echo ===================SPP.js Local=================================== 1>&2
-ls ../data/*.json | grep -v intermediate | grep -v "\.new" | xargs grep -lw Script | xargs ${NODE} ${NODEDIR}/SPP.js
+find ../data -name "*.json" -print0 | xargs -0 grep -lw Script | xargs ${NODE} ${NODEDIR}/SPP.js
