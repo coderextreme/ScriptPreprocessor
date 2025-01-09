@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<html>
+  <head>
+   <meta charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="https://www.x3dom.org/download/dev/x3dom.css"></link>
+    <script type="text/javascript" src="https://www.x3dom.org/download/dev/x3dom-full.debug.js"></script>
+   <style>
+       X3D { width: 900px; height:450px; }
+   </style>
+   </head>
+  <body>
+	<X3D id="x3domjson" xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance" profile="Immersive" version="4.0" xsd:noNamespaceSchemaLocation="http://www.web3d.org/specifications/x3d-4.0.xsd" showStat='false' showLog='false' width='900px' height='450px' backend='webgl'>
+		<Scene>
+			<Inline url='"../data/bubs2.json"'></Inline>
+		</Scene>
+    	</X3D>
+  </body>
+  <script type="module">
+	import { Scripts } from "../node/Script.mjs"
+	const scripts = new Scripts();
+	const url = "../data/bubs2.json";
+	fetch(url)
+	  .then(response => {
+	    if (!response.ok) {
+	      throw new Error(`HTTP error! status: ${response.status}`);
+	    }
+	    return response.json();
+	  })
+	  .then(data => {
+	    //console.log(data); // Process the JSON data
+	    scripts.loadScripts(data, "#x3domjson", url);
+	  })
+	  .catch(error => {
+	    console.error('There was a problem with the fetch operation:', error);
+	  });
+  </script>
+</html>
