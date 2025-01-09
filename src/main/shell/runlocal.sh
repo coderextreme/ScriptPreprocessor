@@ -1,5 +1,4 @@
 #!/bin/bash
-set -x
 set -euo pipefail
 IFS=$'\n\t'
 
@@ -8,5 +7,5 @@ IFS=$'\n\t'
 . ./classpath
 
 # Now does scripts too!
-echo ===================SPP.js Local=================================== 1>&2
+echo ===================SPP.mjs Local=================================== 1>&2
 find ../data -name "*.json" -print0 | xargs -0 grep -lw Script | xargs ${NODE} ${NODEDIR}/SPP.mjs
