@@ -34,7 +34,7 @@ if (typeof x3dom !== 'undefined' && typeof x3dom.fields !== 'undefined') {
     var SFVec3f = x3dom.fields.SFVec3f;
     var SFVec4f = x3dom.fields.SFVec4f;
 } else {
-    var SFVec3f = function() { return Array.prototype.slice.call(arguments, 0); };
+    var SFVec3f = function() { var that = Array.prototype.slice.call(arguments, 0); that.x  = that[0]; that.y = that[1]; that.z = that[2]; return that; };
     var MFVec3f = function() { return Array.prototype.slice.call(arguments, 0); };
     var MFInt32 = function() { return Array.prototype.slice.call(arguments, 0); };
     var MFFloat = function() { return Array.prototype.slice.call(arguments, 0); };

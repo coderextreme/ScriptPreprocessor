@@ -1,7 +1,7 @@
 
 $searchTerm = "Script"
 $nodeProgram = "node.exe"
-$nodeScript = "..\node\WSPP.js"
+$nodeScript = "..\node\WSPP.mjs"
 $folder = "..\data"
 $filePattern = "*.json"
 

@@ -45,7 +45,7 @@ if (typeof x3dom === "undefined")
         };
     }
 
-    console.log("Using x3dom fields.js as standalone math and/or base types library.");
+    console.log("Using x3dom fields.mjs as standalone math and/or base types library.");
 }
 x3dom.fields = {};
 

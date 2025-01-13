@@ -116,10 +116,9 @@ export class Scripts {
 		var __eventTime = 0;
 		var jsonScript = "var myjson = "+JSON.stringify(json, null, 2);
 		try {
-			// TODO eval is evil
 			if (typeof jsonScript !== 'undefined') {
 				//console.log(jsonScript);
-				eval(jsonScript);
+				new Function(jsonScript)();
 			}
 		} catch (e) {
 			console.log(e);
@@ -128,10 +127,9 @@ export class Scripts {
 
 		// initialize scripts
 		try {
-			// TODO eval is evil
 			if (typeof scripts.text !== 'undefined') {
 				//console.log(scripts.text);
-				eval(scripts.text);
+				new Function(scripts.text)();
 			}
 		} catch (e) {
 			console.log(e);
@@ -141,10 +139,9 @@ export class Scripts {
 		 
 		// run initializers, initializeOnly routes, and eventHandler initialization, proxies
 		try {
-			// TODO eval is evil
 			if (typeof routes.text !== 'undefined') {
 				//console.log(routes.text);
-				eval(routes.text);
+				new Function(routes.text)();
 			}
 		} catch (e) {
 			console.log(e);
@@ -153,10 +150,9 @@ export class Scripts {
 		/* event loop */
 		X3DJSON.runRoutes[X3DJSON.runRoutes.length] = function() {
 			try {
-				/* TODO eval is evil */
 				if (typeof loop.text !== 'undefined') {
 					/* console.log(loop.text); */
-					eval(loop.text);
+					new Function(loop.text)();
 				}
 				if (typeof x3dom !== 'undefined') {
 					x3dom.reload();  /* This may be necessary */
@@ -212,7 +208,7 @@ export class Scripts {
 		classes.log("    var SFVec3f = x3dom.fields.SFVec3f;");
 		classes.log("    var SFVec4f = x3dom.fields.SFVec4f;");
 		classes.log("} else {");
-		classes.log("    var SFVec3f = function() { return Array.prototype.slice.call(arguments, 0); };");
+		classes.log("    var SFVec3f = function() { var that = Array.prototype.slice.call(arguments, 0); that.x  = that[0]; that.y = that[1]; that.z = that[2]; return that; };");
 		classes.log("    var MFVec3f = function() { return Array.prototype.slice.call(arguments, 0); };");
 		classes.log("    var MFInt32 = function() { return Array.prototype.slice.call(arguments, 0); };");
 		classes.log("    var MFFloat = function() { return Array.prototype.slice.call(arguments, 0); };");

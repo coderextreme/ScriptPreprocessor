@@ -1,11 +1,18 @@
-var x3dom = require('../node/fields.js');
+var x3dom;
+async function fetch_import(module) {
+  x3dom = await import(module);
+  return x3dom;
+}
+if (typeof x3dom === 'undefined') {
+  x3dom = fetch_import('../node/fields.mjs');
+}
 if (typeof X3DJSON === 'undefined') {
 	var X3DJSON = {};
 }
 if (typeof __eventTime === 'undefined') {
 	var __eventTime = 0;
 }
-if (typeof x3dom !== 'undefined') {
+if (typeof x3dom !== 'undefined' && typeof x3dom.fields !== 'undefined') {
     var MFBool = x3dom.fields.MFBoolean;
     var MFColor = x3dom.fields.MFColor;
     var MFColorRGBA = x3dom.fields.MFColorRGBA;
@@ -27,7 +34,11 @@ if (typeof x3dom !== 'undefined') {
     var SFVec3f = x3dom.fields.SFVec3f;
     var SFVec4f = x3dom.fields.SFVec4f;
 } else {
-    var SFVec3f = function() { return Array.prototype.slice.call(arguments, 0); };
+    var SFVec3f = function() { var that = Array.prototype.slice.call(arguments, 0); that.x  = that[0]; that.y = that[1]; that.z = that[2]; return that; };
+    var MFVec3f = function() { return Array.prototype.slice.call(arguments, 0); };
+    var MFInt32 = function() { return Array.prototype.slice.call(arguments, 0); };
+    var MFFloat = function() { return Array.prototype.slice.call(arguments, 0); };
+    var MFString = function() { return Array.prototype.slice.call(arguments, 0); };
 }
 var SFString = String;
 var SFTime = Number;
@@ -53,7 +64,7 @@ var SFVec2d = function() { return Array.prototype.slice.call(arguments, 0); };
 var SFVec3d = function() { return Array.prototype.slice.call(arguments, 0); };
 var SFVec4d = function() { return Array.prototype.slice.call(arguments, 0); };
 if (typeof document === 'undefined') {
-	document = { querySelector : function() {;
+	var document = { querySelector : function(selector) {;
 		return {
 			setAttribute : function(field, value) {
 				this[field] = value;
@@ -66,9 +77,6 @@ if (typeof document === 'undefined') {
 		};
 	}};
 }
-if (typeof $ !== 'function') {
-	$ = function() { return { attr : function() {}, 0 : null }; };
-}
 X3DJSON.nodeUtil = function(selector, node, field, value) {
 		if (typeof selector === 'undefined') {
 			selector = "";
@@ -76,7 +84,7 @@ X3DJSON.nodeUtil = function(selector, node, field, value) {
 			selector = selector+" ";
 		}
 		selector = selector+"[DEF='"+node+"']";
-		var element = document.querySelector(selector);
+		var element = (document ? document.querySelector(selector) : null);
 		if (element === null) {
 			console.error('unDEFed node', node, selector);
 		} else if (arguments.length > 3) {
@@ -84,7 +92,7 @@ X3DJSON.nodeUtil = function(selector, node, field, value) {
 			if (value && typeof value.toString === 'function') {
 				value = value.toString();
 			}
-			$(selector).attr(field, value);
+			document ? document.querySelector(selector).attr(field, value) : console.error('No document');
 			// console.log('set', node, '.', field, '=', value);
 			*/
 			try {
@@ -115,7 +123,7 @@ X3DJSON.nodeUtil = function(selector, node, field, value) {
 			// console.log('get', node, '.', field,'=',value);
 			return value;
 		} else if (arguments.length > 0) {
-			return $(selector)[0];
+			return document.querySelector(selector)[0];
 		} else {
 			return;
 		}
